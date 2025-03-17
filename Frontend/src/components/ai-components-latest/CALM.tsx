@@ -28,22 +28,22 @@ const CALM: React.FC = () => {
 
     // Condition 1: If speaking is detected
     if (isSpeaking === "Yes") {
-      newPenaltyPoints += 10;
+      newPenaltyPoints += 1;
     }
 
     // Condition 2: If faces count is not exactly 1
     if (facesCount !== 1) {
-      newPenaltyPoints += 100;
+      newPenaltyPoints += 1;
     }
 
     // Condition 3: If the screen is blurred
     if (isBlur === "Yes") {
-      newPenaltyPoints += 50;
+      newPenaltyPoints += 1;
     }
 
     // Condition 4: If not focused
     if (!isFocused) {
-      newPenaltyPoints += 10;
+      newPenaltyPoints += 1;
     }
 
     // If there are any new penalty points, increment the cumulative score
@@ -51,6 +51,9 @@ const CALM: React.FC = () => {
       setPenaltyPoints((prevPoints) => prevPoints + newPenaltyPoints);
     }
   }, [isSpeaking, facesCount, isBlur, isFocused]); // Watch for changes to these variables
+
+  // Check if any anomalies are detected
+  const isAnomaliesDetected = isSpeaking === "Yes" || facesCount !== 1 || isBlur === "Yes" || !isFocused;
 
   return (
     <div className="container mx-auto p-4">
@@ -83,10 +86,17 @@ const CALM: React.FC = () => {
         <SpeechDetector setIsSpeaking={setIsSpeaking} />
       </div>
 
+      {/* Flashing text indicating anomalies */}
+      {isAnomaliesDetected && (
+        <div className="text-center text-2xl font-bold text-red-600 animate-pulse">
+          Detected Anomalies! 🚨
+        </div>
+      )}
+
       <div className="space-y-2">
         <h2 className="text-xl font-bold">Results</h2>
         <div className="text-lg">
-          <p>Blur: {isBlur}</p>
+          <p>Blur (): {isBlur}</p>
           <p>Speaking: {isSpeaking}</p>
           <p>Gesture: {gesture}</p>
           <p>Focus: {isFocused ? "Focused" : "Not Focused"}</p>
