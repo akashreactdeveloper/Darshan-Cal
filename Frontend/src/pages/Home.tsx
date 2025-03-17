@@ -46,7 +46,7 @@ import { DashboardDropdown } from '@/components/ui/DashboardDropdown'
 
 const Home = () => {
   // State to control right sidebar visibility
-  const [isRightSidebarVisible, setIsRightSidebarVisible] = useState(false)
+  const [isRightSidebarVisible, setIsRightSidebarVisible] = useState(true)
 
   // Toggle handler for right sidebar
   const toggleRightSidebar = () => {
