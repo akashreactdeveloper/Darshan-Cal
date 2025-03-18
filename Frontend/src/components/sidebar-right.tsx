@@ -52,6 +52,7 @@ import { ModeToggle } from './mode-toggle'
 import ParentComponent from './proctoring-components/ParentComponent'
 import BlurDetectction from './proctoring-components/BlurDetection'
 import SnapshotRecorder from './proctoring-components/SnapshotRecorder'
+import CALM from './ai-components-latest/CALM'
 
 // Sample data for user profile and calendars
 const data = {
@@ -90,9 +91,9 @@ export function SidebarRight({
     >
       {/* Header section with user profile */}
       <SidebarHeader className='h-16 border-b border-sidebar-border'>
-        <NavUser user={data.user} />
+        <h1>CAL Monitor</h1>
       </SidebarHeader>
-
+      <CALM />
       {/* Footer section with proctoring tools and new schedule button */}
       <SidebarFooter>
         <SidebarMenu>
@@ -100,8 +101,6 @@ export function SidebarRight({
           {/* <CameraAndMicCheck /> */}
           <SidebarMenuItem>
             <SidebarMenuButton>
-              <Plus />
-              <span>New Schedule</span>
             </SidebarMenuButton>
           </SidebarMenuItem>
         </SidebarMenu>
