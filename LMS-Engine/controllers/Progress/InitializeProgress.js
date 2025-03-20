@@ -1,6 +1,7 @@
 const axios = require("axios");
 const Course = require("../../models/Course/CourseSchema");
 const User = require("../../models/User/UserSchema");
+const Batch = require("../../models/User/BatchSchema");
 const { createBatch } = require("../../controllers/Batch/CreateBatchController");
 
 exports.enrollStudents = async (req, res) => {
@@ -20,6 +21,7 @@ exports.enrollStudents = async (req, res) => {
         .json({ success: false, message: "User not authenticated" });
     }
     const instituteId = user.institute;
+    console.log("Institute ID:", instituteId);
 
     // Validate course existence
     const course = await Course.findById(courseId).populate({
@@ -32,6 +34,7 @@ exports.enrollStudents = async (req, res) => {
         },
       },
     });
+    console.log("Course details:", course);
 
     if (!course) {
       return res
@@ -46,6 +49,7 @@ exports.enrollStudents = async (req, res) => {
     // }
 
     // Construct batchData for createBatch
+    console.log("Creating batch data for:", batchName);
     const batchData = {
       batchName,
       instituteId,
